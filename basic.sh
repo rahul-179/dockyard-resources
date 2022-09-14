@@ -11,7 +11,7 @@ curl https://github.com/oneconvergence/dkube-examples/blob/tensorflow/README.md
 
 #Cloning git repository
 [[ -d "/tmp/dockyard-resources" ]]  &&  rm -rf /tmp/dockyard-resources
-git -C /tmp clone https://github.com/rahul-179/dockyard-resources.git
+git -C /tmp clone https://github.com/rahul-179/dockyard-resources.git && rm -rf /tmp/dockyard-resources
 
 #aws s3 access 
 aws sts get-caller-identity 

@@ -1,18 +1,18 @@
 #!/bin/bash -x
 
 #install package
-sudo apt-get update -y || { echo "command: apt update failed"; }
-sudo apt-get install curl -y || { echo"command: apt install curl failed"; }
+sudo apt-get -qq update -y || { echo "command: apt update FAILED"; }
+sudo apt-get -qq install curl -y || { echo"command: apt install curl FAILED"; }
 
 # curl access
 curl https://github.com/oneconvergence/dkube-examples/blob/tensorflow/README.md || { echo "command: curl https://github.com/oneconvergence/dkube-examples/blob/tensorflow/README.md FAILED"; }
 
 #Cloning git repository
 [[ -d "./dockyard-resources" ]]  &&  sudo rm -rf ./dockyard-resources
-git clone https://github.com/rahul-179/dockyard-resources.git || { echo "command: git clone failed"; }
+git clone https://github.com/oneconvergence/dkube-examples.git || { echo "command: git clone https://github.com/oneconvergence/dkube-examples.git FAILED"; }
 
 #aws s3 access 
-aws sts get-caller-identity || { echo "command aws sts get-caller-identity FAILED"; }
+aws sts get-caller-identity || { echo "command: aws sts get-caller-identity FAILED"; }
 
 aws s3 cp s3://altos-oneconvergence-tfstate/root.tfstate . || { echo "command: aws s3 cp to current dir FAILED"; }
 
@@ -21,7 +21,7 @@ aws s3 cp s3://altos-oneconvergence-tfstate/root.tfstate /home/default && { echo
 #Verify read/write access on other user
 
 touch /home/default/testfile && { echo "command: touch /home/default/testfile PASSED UNEXPECTED"; rm /home/default/testfile; }
-touch test || { echo "command: touch failed"; }
+touch test || { echo "command: touch FAILED"; }
 
 #Changing file permissions
 sudo chmod 777 /home/default && { echo "command: sudo chmod 777 /home/default PASSED UNEXPECTED"; sudo chmod 755 /home/default; }

@@ -1,5 +1,6 @@
 #!/bin/bash -x
 
+echo "Starting Script"
 e=0;
 #install package
 sudo apt-get -qq update -y || { echo "command: apt update FAILED"; e=1; }
